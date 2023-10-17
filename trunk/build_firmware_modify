@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "I am here! Step 2"
+echo "$1" "$2"
 if [ -z "$1" ] || [ "$EUID" != 0 ]; then
 	echo "Please run 'fakeroot $0 PRODUCT_NAME' to start build (see 'configs/templates/')"
 	echo "For Windows Subsystem for Linux(WSL), use 'fakeroot-tcp' instead of 'fakeroot', or run with sudo"
@@ -13,6 +14,10 @@ if [ ! -f configs/templates/$1.config ] ; then
 fi
 
 cp -f configs/templates/$1.config .config
+
+echo "I am here! Step 3"
+cat .config
+
 sed -i 's/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n/g' .config
 sed -i 's/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=y/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n/g' .config
 sed -i 's/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=y/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n/g' .config
